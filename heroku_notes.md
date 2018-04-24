@@ -1,20 +1,47 @@
-**Base setup**
+**Before starting**
+
+Install the [Heroku Toolbelt](https://devcenter.heroku.com/articles/heroku-cli) and login in your console:
 
 ```bash
+$ heroku login
+```
+
+**Django app - Base setup**
+
+```bash
+# Create the app
 $ heroku create wdc-class-7-django-heroku
-$ heroku config:set PYTHONPATH=cryptos_alert
-$ heroku config:set DJANGO_SETTINGS_MODULE=cryptos_alert.settings.prod
+# Set Django ENV_VARS
+$ heroku config:set PYTHONPATH=coinmarketcap
+$ heroku config:set DJANGO_SETTINGS_MODULE=coinmarketcap.settings.prod
 ```
 
-**Starting and stopping clock**
+**Initial deploy**
 
 ```bash
-$ heroku ps:scale clock=1
-$ heroku ps
-$ heroku ps:stop clock.1
+$ git push heroku master
 ```
 
-**Realtime logs**
+**Migrate Database**
+
+```bash
+$ heroku run django-admin migrate
+```
+
+**Create superuser**
+
+```bash
+$ heroku run django-admin createsuperuser
+```
+
+**Import cryptos using the command**
+
+```bash
+$ heroku run django-admin shell
+# paste the content of import-sample-data.py
+```
+
+**Showing logs**
 
 ```bash
 $ heroku logs --tail
