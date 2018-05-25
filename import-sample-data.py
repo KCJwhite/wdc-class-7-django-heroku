@@ -1,6 +1,10 @@
+import django
+django.setup()
+
 import requests
 from datetime import datetime
 from cryptocoins.models import Cryptocurrency
+
 
 response = requests.get('https://api.coinmarketcap.com/v1/ticker/')
 for doc in response.json():
